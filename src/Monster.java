@@ -1,31 +1,39 @@
-public class Monster extends Fight implements Skill {
-    private String name;
-    private int health;
+import java.util.Scanner;
 
-    public Monster(String name) {
-        this.name = name;
-    }
+public class Monster extends Fight implements Skill {
+    Scanner sc = new Scanner(System.in);
+    private String name;
+    public int health;
+    public static int monsterDamage;
+
 
     public Monster(String name, int health) {
         this.name = name;
         this.health = health;
     }
 
-    @Override
-    public void attack() {
-        System.out.println(name + " 가 공격합니다.");
+    public Monster(int monsterDamage) {
+        this.monsterDamage = monsterDamage;
     }
 
-    void takeDamge(){
-        int playerDamage = (int)(Math.random() * 3 + 7);
-        health -= playerDamage;
-        if(health > 0){
-            System.out.println(name + " 의 체력 : " + health);
-        }else {
-            System.out.println(name + " 체력 : 0");
-            System.out.println(name + "이(가) 사망했습니다.");
+    @Override
+    public void attack() {
+        System.out.println(" ");
+        System.out.println("\'" + name + "\'가 [ "+ monsterDamage + " ]의 데미지로 반격합니다!");
+    }
+
+
+    void takeDamge() {
+        health -= Player.playerDamage;
+        if (health > 0) {
+            System.out.println("\'" + name + "\'의 남은 체력 [ " + health + " ]");
+        } else{
+            this.health = 0;
+            System.out.println("\'" + this.name + "\'의 남은 체력 [ " + this.health + " ]");
+            System.out.println("\'" + this.name + "\'를 퇴치했습니다.");
+            System.out.println(" ");
+            System.out.println("축하합니다! 클리어 하셨습니다.");
         }
 
     }
 }
-
